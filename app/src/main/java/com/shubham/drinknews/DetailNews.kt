@@ -1,19 +1,30 @@
 package com.shubham.drinknews
 
 import android.annotation.SuppressLint
-import android.opengl.Visibility
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.ProgressBar
+import androidx.appcompat.app.AppCompatActivity
+
 
 class DetailNews : AppCompatActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_news)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val window: Window = window
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.setStatusBarColor(Color.parseColor("#FF000000"))
+        }
+
+        supportActionBar?.hide()
         val url:String? = intent.getStringExtra("URL")
         val webView = findViewById<WebView>(R.id.webView)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)

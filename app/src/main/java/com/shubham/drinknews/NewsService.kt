@@ -10,21 +10,22 @@ import retrofit2.http.Query
 
 const val BASE_URL = "https://newsapi.org/"
 const val API_KEY = "b145bc38ee284bf5a190b1367cac8f14"
+
 interface NewsInterface {
 
     @GET("v2/top-headlines?apiKey=$API_KEY")
-    fun getHeadLine(@Query("country") country: String ,@Query("page") pageNo: Int) : Call<News>
+    fun getHeadLine(@Query("country") country: String, @Query("page") pageNo: Int): Call<News>
 
 }
 
-object NewsService{
+object NewsService {
 
-    val newsInterface : NewsInterface
+    val newsInterface: NewsInterface
+
     init {
-        val retrofit = Retrofit.Builder().
-                baseUrl(BASE_URL).
-                addConverterFactory(GsonConverterFactory.create()).
-                build()
+        val retrofit =
+            Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create())
+                .build()
 
         newsInterface = retrofit.create(NewsInterface::class.java)
     }
