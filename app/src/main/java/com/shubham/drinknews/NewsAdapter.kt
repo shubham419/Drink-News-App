@@ -1,6 +1,7 @@
 package com.shubham.drinknews
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,11 @@ class NewsAdapter(val context: Context,val articles: List<Article>) :
         holder.newsTitle.text = article.title
         holder.newsDescription.text = article.description
         Glide.with(context).load(article.urlToImage).into(holder.newsImage)
+        holder.itemView.setOnClickListener{
+            val intent = Intent(context,DetailNews::class.java)
+            intent.putExtra("URL", article.url)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
